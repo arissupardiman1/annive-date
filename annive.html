@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy Anniversary Falah ❤️</title>
+
+<style>
+
+html,body{
+margin:0;
+padding:0;
+height:100%;
+font-family:Arial, sans-serif;
+color:white;
+text-align:center;
+background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
+overflow:hidden;
+}
+
+.container{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:700px;
+}
+
+.hidden{
+display:none;
+}
+
+#envelope{
+position:fixed;
+width:100%;
+height:100%;
+background:#ff4d6d;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+cursor:pointer;
+z-index:9999;
+}
+
+#loading{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:999;
+}
+
+.loader{
+width:40px;
+height:40px;
+border:4px solid white;
+border-top:4px solid pink;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg)}
+}
+
+button{
+padding:12px 28px;
+border:none;
+border-radius:25px;
+font-size:18px;
+margin:10px;
+cursor:pointer;
+}
+
+.yes{
+background:#ff4d6d;
+color:white;
+}
+
+.no{
+background:#555;
+color:white;
+}
+
+#countdown{
+font-size:22px;
+margin:10px;
+}
+
+.bar{
+width:300px;
+height:20px;
+background:#444;
+border-radius:20px;
+margin:auto;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:#ff4d6d;
+transition:2s;
+}
+
+/* STACK GALLERY */
+
+.gallery-stack{
+position:relative;
+width:320px;
+height:380px;
+margin:auto;
+}
+
+.gallery-stack img{
+position:absolute;
+width:100%;
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+opacity:0;
+transform:translateY(-100px) scale(0.9) rotate(0deg);
+transition:1s ease;
+}
+
+.gallery-stack img.show{
+opacity:1;
+transform:translateY(0) scale(1) rotate(var(--rot));
+}
+
+.letter{
+background:white;
+color:#333;
+padding:60px;
+border-radius:50px;
+height:600px;
+overflow-y:auto;
+text-align:left;
+line-height:1.6;
+}
+
+.star{
+position:fixed;
+width:3px;
+height:3px;
+background:white;
+opacity:.8;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:.3}
+to{opacity:1}
+}
+
+.sakura{
+position:fixed;
+top:-10px;
+font-size:20px;
+animation:fall 8s linear infinite;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
+}
+
+.heart{
+position:fixed;
+top:-20px;
+font-size:20px;
+animation:fallHeart 6s linear infinite;
+}
+
+@keyframes fallHeart{
+to{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+
+.final{
+font-size:40px;
+margin-top:20px;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{transform:scale(1)}
+to{
+transform:scale(1.1);
+text-shadow:0 0 20px pink;
+}
+}
+
+#gallery button{
+margin-top:300px;
+}
+
+.nextBtn{
+margin-top:420px;
+opacity:0;
+transition:1s;
+}
+
+.nextBtn.show{
+opacity:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="envelope">
+<h2>💌</h2>
+<p>Klik untuk membuka pesan dari Aris</p>
+</div>
+
+<div id="loading">
+<h2>Preparing something special for Falah ❤️</h2>
+<div class="loader"></div>
+</div>
+
+<div id="start" class="container hidden">
+
+<h1>Hai Falah ❤️</h1>
+
+<p>Website annive jadi jadian ini khusus untuk kamu ❤️</p>
+
+<h3>Menuju Anniversary Kita</h3>
+
+<div id="countdown">Loading...</div>
+
+<p id="together"></p>
+
+<button class="yes" onclick="next('q1')">Mulai Sekarang</button>
+
+</div>
+
+<div id="q1" class="container hidden">
+<h2>Apakah Falah cantik dan imut?</h2>
+<button class="yes" onclick="next('q2')">Iya</button>
+<button class="no">Tidak</button>
+</div>
+
+<div id="q2" class="container hidden">
+<h2>Apakah Aris cinta sama Falah?</h2>
+<button class="yes" onclick="next('q3')">Iya</button>
+<button class="no">Tidak</button>
+</div>
+
+<div id="q3" class="container hidden">
+<h2>Apakah Aris sayang sama Falah?</h2>
+<button class="yes" onclick="next('meter')">Iya</button>
+<button class="no">Tidak</button>
+</div>
+
+<div id="meter" class="container hidden">
+
+<h2>Tingkat Cinta Mas Aris ❤️</h2>
+
+<div class="bar">
+<div id="fill" class="fill"></div>
+</div>
+
+<p id="percent">0%</p>
+
+<button class="yes" onclick="next('gallery')">Lanjut</button>
+
+</div>
+
+<div id="gallery" class="container hidden">
+
+<h2>Kenangan Kita</h2>
+
+<div class="gallery-stack" id="photoStack">
+
+<img src="foto1.jpg">
+<img src="foto2.jpg">
+<img src="foto3.jpg">
+<img src="foto4.jpg">
+<img src="foto5.jpg">
+<img src="foto6.jpg">
+<img src="foto7.jpg">
+<img src="foto8.jpeg">
+<img src="foto9.jpg">
+<img src="foto10.jpg">
+<img src="foto11.jpg">
+<img src="foto12.jpeg">
+<img src="foto13.jpg">
+
+</div>
+
+<button id="nextGallery" class="yes nextBtn hidden" onclick="next('letter')">Lanjut</button>
+
+</div>
+
+<div id="letter" class="container hidden">
+
+<h1>Happy Anniversary Falah ❤️</h1>
+
+<div class="letter">
+<p id="text"></p>
+</div>
+
+<div id="final" class="final hidden">
+I Love You Falah ❤️
+</div>
+
+</div>
+
+<script>
+
+document.getElementById("envelope").onclick=function(){
+this.style.display="none"
+document.getElementById("music").play()
+}
+
+window.onload=function(){
+setTimeout(()=>{
+document.getElementById("loading").style.display="none"
+document.getElementById("start").classList.remove("hidden")
+},3000)
+}
+
+function next(id){
+
+document.querySelectorAll(".container").forEach(c=>c.classList.add("hidden"))
+
+document.getElementById(id).classList.remove("hidden")
+
+if(id==="meter") startMeter()
+if(id==="letter") typeLetter()
+if(id==="gallery") startGallery()
+
+}
+
+document.querySelectorAll(".no").forEach(btn=>{
+btn.addEventListener("mouseover",()=>{
+btn.style.position="absolute"
+btn.style.left=Math.random()*600+"px"
+btn.style.top=Math.random()*400+"px"
+})
+})
+
+for(let i=0;i<100;i++){
+let star=document.createElement("div")
+star.className="star"
+star.style.left=Math.random()*100+"vw"
+star.style.top=Math.random()*100+"vh"
+document.body.appendChild(star)
+}
+
+setInterval(()=>{
+let s=document.createElement("div")
+s.className="sakura"
+s.innerHTML="🌸"
+s.style.left=Math.random()*100+"vw"
+document.body.appendChild(s)
+setTimeout(()=>s.remove(),8000)
+},700)
+
+function startMeter(){
+
+let fill=document.getElementById("fill")
+let percent=document.getElementById("percent")
+
+let i=0
+
+let interval=setInterval(()=>{
+
+i++
+
+fill.style.width=i+"%"
+percent.innerHTML=i+"%"
+
+if(i>=100) clearInterval(interval)
+
+},20)
+
+}
+
+/* STACK PHOTO */
+
+let photoIndex=0
+
+function startGallery(){
+
+let photos=document.querySelectorAll("#photoStack img")
+
+if(photoIndex >= photos.length){
+
+let btn=document.getElementById("nextGallery")
+
+btn.classList.remove("hidden")
+
+setTimeout(()=>{
+btn.classList.add("show")
+},200)
+
+return
+}
+
+let photo=photos[photoIndex]
+
+let rot=(Math.random()*20-10)+"deg"
+
+photo.style.setProperty("--rot",rot)
+
+photo.classList.add("show")
+
+photo.style.zIndex=photoIndex
+
+photoIndex++
+
+setTimeout(startGallery,1400)
+
+}
+
+const anniversary=new Date("2026-03-16 00:00:00").getTime()
+const startDate=new Date("2024-03-16")
+
+setInterval(()=>{
+
+let now=new Date().getTime()
+let distance=anniversary-now
+
+let d=Math.floor(distance/(1000*60*60*24))
+let h=Math.floor((distance%(1000*60*60*24))/(1000*60*60))
+let m=Math.floor((distance%(1000*60*60))/(1000*60))
+let s=Math.floor((distance%(1000*60))/1000)
+
+if(distance>0){
+
+document.getElementById("countdown").innerHTML=
+d+" hari "+h+" jam "+m+" menit "+s+" detik"
+
+}else{
+
+document.getElementById("countdown").innerHTML=
+"Happy Anniversary Falah ❤️🎉"
+
+startConfetti()
+
+}
+
+let today=new Date()
+let diff=today-startDate
+let days=Math.floor(diff/(1000*60*60*24))
+
+document.getElementById("together").innerHTML=
+"Mas Aris ❤️ Falah sudah bersama selama "+days+" hari"
+
+},1000)
+
+function startConfetti(){
+
+setInterval(()=>{
+
+let heart=document.createElement("div")
+
+heart.className="heart"
+heart.innerHTML="❤️"
+heart.style.left=Math.random()*100+"vw"
+
+document.body.appendChild(heart)
+
+setTimeout(()=>heart.remove(),6000)
+
+},4000)
+
+}
+
+const letter=`Untuk Falah,
+
+Hari ini aku mencoba berhenti sebentar dari semua rutinitas dan memikirkan satu hal: perjalanan kita sampai di titik ini.
+
+Kalau dipikir-pikir, dulu aku tidak pernah membayangkan hidupku akan berubah seperti sekarang. Hidupku sebelumnya cukup sederhana dan berjalan di jalurnya sendiri. Lalu kamu datang, dan tanpa terasa kamu menjadi bagian yang sangat penting dalam hidupku.
+
+Bersamamu aku belajar banyak hal yang sebelumnya tidak terlalu kupahami. Tentang bagaimana memperhatikan perasaan orang lain, tentang bagaimana sebuah percakapan bisa terasa hangat, dan tentang bagaimana seseorang bisa membuat hari-hari biasa menjadi terasa lebih berarti.
+
+Aku tahu aku bukan orang yang paling pandai mengungkapkan rasa sayang. Kadang aku terlalu diam, terlalu sibuk dengan pikiranku sendiri, atau lupa menceritakan banyak hal. Tapi di balik semua itu, kamu selalu ada di pikiranku lebih sering dari yang mungkin kamu bayangkan.
+
+Aku suka melihat cara kamu berusaha dalam banyak hal. Cara kamu peduli pada orang lain, cara kamu terus mencoba memahami dunia di sekitarmu, dan cara kamu tetap berjuang meskipun sering meragukan dirimu sendiri.
+
+Kalau kamu tahu bagaimana aku melihatmu, mungkin kamu tidak akan sekeras itu pada dirimu sendiri.
+
+Terima kasih sudah berjalan bersamaku sampai hari ini. Terima kasih sudah menerima aku dengan segala kekuranganku. Dan terima kasih sudah menjadi seseorang yang membuat hidupku terasa lebih hangat.
+
+Semoga perjalanan kita masih panjang.
+Masih banyak hari, cerita, dan tawa yang akan kita lalui bersama.
+
+Selamat anniversary, Falah.
+
+— Aris ❤️`
+
+let i=0
+
+function typeLetter(){
+
+if(i<letter.length){
+
+document.getElementById("text").innerHTML+=letter.charAt(i)
+
+i++
+
+setTimeout(typeLetter,25)
+
+}else{
+
+document.getElementById("final").classList.remove("hidden")
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
